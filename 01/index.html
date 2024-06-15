@@ -1,0 +1,26 @@
+<!-- 了解使用CDN方法写Vue项目，使用CDN引入Vue的方式已经越来越少有人用，只需要了解即可。
+目前新开发的项目基本上都是前后端分离的项目，CDN引入的方式适用于前后端不分离的项目。 -->
+<!-- 每次使用Vue的时候都需要创建新的应用，使用vue.createApp({})函数，可选参数是个对象，创建应用后还需要告诉Vue，新的应用实例需要挂载（mount方法）到DOM的哪个位置 -->
+<!-- data函数返回一个对象,可以把初始的数据放到data里，如"零食清单"，这样它就可以动态改变 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+    </div>
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    title: '零食清单'
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

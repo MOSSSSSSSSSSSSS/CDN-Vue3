@@ -1,0 +1,62 @@
+<!-- 1.数组的filter方法进行过滤，在数组处进行过滤，返回数组
+2.实际上v-for="(item, index) in items"，vue默认绑定key=index，vue是利用key属性跟踪和更新元素从而提高性能的，上下两个零食清单可能出现相同的key，
+key需要是唯一值，需要显式地改写这个默认的key值，两个v-for循环都进行配置，因为id是不同的，因此用id作为key
+3.v-bind缩写为冒号
+4.当全部都为已购零食时，未购零食这几个字不应该出现，显示与不显示可以用v-show,接收的值如果是true就显示，是用css的display来控制的
+5.重复了很多代码，主要是filter部分，可以使用vue的computed计算属性，是createApp对象参数的一个属性，用，和data分开，computed接收一个对象，可以在里面设置函数
+把filter部分变为函数名，函数名不需要括号，计算属性在需要时才更新也提升了性能 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <section v-show="beforeBuy.length"> 
+            <h2>未购零食</h1>
+                <ul>
+                    <li v-for="food in beforeBuy" :key="food.id">
+                        <img :src="food.image">
+                        <span>{{ food.name }}</span>
+                        <input type="checkbox" v-model="food.purchased"> 
+                    </li>
+                </ul>
+        </section>
+
+        <section v-show="afterBuy.length">
+            <h2>已购零食</h1>
+                <ul>
+                    <li v-for="food in afterBuy" :key="food.id">
+                        <img :src="food.image">
+                        <span>{{ food.name }}</span>
+                        <input type="checkbox" v-model="food.purchased"> 
+                    </li>
+                </ul>
+        </section>
+    </div>
+   
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    foods: [
+                        { id: 1, name: '原味鱿鱼丝', image: './images/原味鱿鱼丝.png', purchased: false},
+                        { id: 2, name: '辣味鱿鱼丝', image: './images/辣味鱿鱼丝.png', purchased: false},
+                        { id: 3, name: '炭烧味鱿鱼丝', image: './images/碳烧味鱿鱼丝.png', purchased: false}
+                    ]
+                }
+            },
+            computed: {
+                beforeBuy(){
+                    return this.foods.filter(item => !item.purchased)  //这里要用this
+                },
+                afterBuy(){
+                    return this.foods.filter(item => item.purchased)
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

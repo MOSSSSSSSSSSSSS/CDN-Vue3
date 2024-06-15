@@ -1,0 +1,39 @@
+<!-- ul包裹多个li标签，用来形成一个列表展示数据，li的循环可以用vue的v-for循环 -->
+ <!-- Vue中使用v-bind:来为html属性和数据绑定 -->
+  <!-- v-model:双向绑定，vue数据变动，dom变动，dom变动，vue数据也变动 ，如果直接在checkbox的输入框使用v-model，就会把输入框的值和相应的vue数据绑定-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <ul>
+            <li v-for="food in foods">
+                <img v-bind:src="food.image"> <!--不需要插值表达式，用了v-bind:就可以直接读取数据了 -->
+                <span>{{ food.name }}</span>
+                <input type="checkbox" v-model="food.purchase"> 
+                <span>{{ food.purchase }}</span>
+            </li>
+        </ul>
+    </div>
+   
+    <script>
+        Vue.createApp({
+            data(){
+                return {
+                    title: '零食清单',
+                    foods: [
+                        { id: 1, name: '原味鱿鱼丝', image: './images/原味鱿鱼丝.png', purchased: false},
+                        { id: 2, name: '辣味鱿鱼丝', image: './images/辣味鱿鱼丝.png', purchased: false},
+                        { id: 3, name: '炭烧味鱿鱼丝', image: './images/碳烧味鱿鱼丝.png', purchased: false}
+                    ]
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

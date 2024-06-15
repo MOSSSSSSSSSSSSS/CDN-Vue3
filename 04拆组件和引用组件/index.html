@@ -1,0 +1,23 @@
+<!-- createApp对象参数data(){},computed,还有template，是在里面写html的，比如多个页面有同一个元素，不用写多次html，而是用vue一对多地挂载上去
+vue的一个核心概念：组件，根组件，子组件，孙组件，拆组件：把大组件拆成独立的组件
+继续把根组件拆组件，使用子组件的时候需要注册组件，需要用到和template它们同级的components属性，接收一个对象，填入组件的名字，注册后使用子组件，用html标签的形式嵌入，html不区分
+大小写，因此如果组件是驼峰命名的，需要大写变小写加上用-分隔，vue就会把标签名和组件名对应起来，引入对象，注册组件，书写模版 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+   
+    <script type="module">  //使用了ES6模块的js文件，在引用的时候，在script标签里类型改成module
+        import App from './components/App.js'
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html>
